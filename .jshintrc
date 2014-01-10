@@ -21,6 +21,7 @@
         "Messaging": true,
         "File": true,
         "sjcl": true,
-        "crypto": true
+        "crypto": true,
+        "jsondiffpatch": true
     }
 }

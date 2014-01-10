@@ -30,7 +30,7 @@ module.exports = function(grunt) {
                 banner: '<%= meta.banner %>'
             },
             dist: {
-                src: ['src/aerogear.core.js', 'external/uuid/uuid.js', 'external/base64/base64.js', 'external/crypto/sjcl.js', 'src/external/es6-promise/promise-0.1.1.js', 'src/aerogear.ajax.js', 'src/pipeline/aerogear.pipeline.js', 'src/pipeline/adapters/rest.js', 'src/data-manager/aerogear.datamanager.js', 'src/data-manager/adapters/base.js', 'src/data-manager/adapters/memory.js', 'src/data-manager/adapters/session-local.js', 'src/data-manager/adapters/indexeddb.js', 'src/data-manager/adapters/websql.js', 'src/authentication/aerogear.auth.js', 'src/authentication/adapters/rest.js', 'src/authorization/aerogear.authz.js', 'src/authorization/adapters/oauth2.js', 'src/notifier/aerogear.notifier.js', 'src/notifier/adapters/base.js', 'src/notifier/adapters/simplePush.js', 'src/notifier/adapters/vertx.js', 'src/notifier/adapters/stompws.js', 'src/notifier/adapters/mqttws.js', 'src/unifiedpush/aerogear.unifiedpush.js', 'src/simplepush/aerogear.simplepush.js', 'src/crypto/aerogear.crypto.js'],
+                src: ['src/aerogear.core.js', 'external/uuid/uuid.js', 'external/base64/base64.js', 'external/crypto/sjcl.js', 'external/jsondiffpatch/jsondiffpatch.min.js', 'src/external/es6-promise/promise-0.1.1.js', 'src/aerogear.ajax.js', 'src/pipeline/aerogear.pipeline.js', 'src/pipeline/adapters/rest.js', 'src/data-manager/aerogear.datamanager.js', 'src/data-manager/adapters/base.js', 'src/data-manager/adapters/memory.js', 'src/data-manager/adapters/session-local.js', 'src/data-manager/adapters/indexeddb.js', 'src/data-manager/adapters/websql.js', 'src/authentication/aerogear.auth.js', 'src/authentication/adapters/rest.js', 'src/authorization/aerogear.authz.js', 'src/authorization/adapters/oauth2.js', 'src/notifier/aerogear.notifier.js', 'src/notifier/adapters/base.js', 'src/notifier/adapters/simplePush.js', 'src/notifier/adapters/vertx.js', 'src/notifier/adapters/stompws.js', 'src/notifier/adapters/mqttws.js', 'src/unifiedpush/aerogear.unifiedpush.js', 'src/simplepush/aerogear.simplepush.js', 'src/crypto/aerogear.crypto.js'],
                 dest: 'dist/<%= pkg.name %>.js'
             },
             pipeline: {
@@ -106,6 +106,10 @@ module.exports = function(grunt) {
             oauth2: {
                 src: ['src/aerogear.core.js', 'external/uuid/uuid.js', 'src/authorization/aerogear.authz.js', 'src/authorization/adapters/oauth2.js'],
                 description: 'Authz OAuth2 adapter build',
+                dest: 'dist/<%= pkg.name %>.custom.js'
+            },
+            dataSync: {
+                src: ['src/aerogear.core.js', 'external/uuid/uuid.js', 'external/jsondiffpatch/jsondiffpatch.min.js', 'src/data-sync/aerogear.datasync.js' ],
                 dest: 'dist/<%= pkg.name %>.custom.js'
             }
         },
@@ -247,6 +251,7 @@ module.exports = function(grunt) {
     grunt.registerTask('push', ['concat:push']);
     grunt.registerTask('crypto', ['concat:crypto']);
     grunt.registerTask('oauth2', ['concat:oauth2']);
+    grunt.registerTask('sync', ['concat:dataSync']);
     grunt.registerTask('travis', ['jshint', 'qunit', 'concat:dist', 'shell:integrationSetup', 'shell:integrationVertxRunner', 'shell:integrationActiveMQRunner', 'shell:integrationSimplePushRunner']);
     grunt.registerTask('docs',['shell:docs']);
 
