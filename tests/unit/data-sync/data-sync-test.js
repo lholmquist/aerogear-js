@@ -73,7 +73,7 @@
     asyncTest( "Update Document - with conflict", function() {
         var dataSync = AeroGear.DataSync( { syncServerUrl: "http://localhost:8080" } ),
             doc = {
-                id: uuid.v4(),
+                id: "12345",
                 content: {
                     model: "bmw",
                     color: "black"
@@ -86,6 +86,7 @@
                 var firstDoc = response;
 
                 doc.content.model = "honda";
+                doc.rev = firstDoc.rev;
 
                 dataSync.save( doc, {
                     success: function( response ) {
@@ -110,7 +111,7 @@
     asyncTest( "Update Document - with conflict - with array", function() {
         var dataSync = AeroGear.DataSync( { syncServerUrl: "http://localhost:8080" } ),
             doc = {
-                id: uuid.v4(),
+                id: "12345",
                 content: [
                     {
                         id: "1",
@@ -134,6 +135,8 @@
                 doc.content[ 1 ].engine = "v6";
 
                 doc.content[ 0 ].color = "red";
+
+                doc.rev = firstDoc.rev;
 
                 dataSync.save( doc, {
                     success: function( response ) {
